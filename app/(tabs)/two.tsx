@@ -1,14 +1,20 @@
 import { StyleSheet } from 'react-native';
-
+import React from 'react';
 import EditScreenInfo from '../../components/EditScreenInfo';
 import { Text, View } from '../../components/Themed';
+import { TextInput } from 'react-native/Libraries/Components/TextInput/TextInput';
+import { useState } from 'react';
+import LoginFunction from '../../components/Formulaire-login';
 
 export default function TabTwoScreen() {
+
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab Two</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/two.tsx" />
+      <View style={styles.Titre}>
+        <Text style={styles.TitreFont}>Bienvenue l'application CESI ta Paire</Text>
+        <LoginFunction/>
+      </View>
     </View>
   );
 }
@@ -19,9 +25,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  title: {
+  Titre: {
+    flex: 1,
+    margin: 30,
+    alignItems: 'center'
+  },
+  TitreFont: {
+    fontFamily: "Arial",
     fontSize: 20,
-    fontWeight: 'bold',
+    fontWeight: "bold",
+
   },
   separator: {
     marginVertical: 30,

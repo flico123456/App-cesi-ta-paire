@@ -2,13 +2,15 @@ import { StyleSheet } from 'react-native';
 
 import EditScreenInfo from '../../components/EditScreenInfo';
 import { Text, View } from '../../components/Themed';
+import { Image } from 'react-native';
 
 export default function TabOneScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/index.tsx" />
+      <View style={styles.com}>
+        <Text style={styles.titre}>CESI TA PAIRE</Text>
+        <Image style={styles.image_titre} source={{uri:"https://cdn.discordapp.com/attachments/1044193079688712213/1096070322601611264/rectangle_3.png"}}></Image>
+      </View>
     </View>
   );
 }
@@ -17,15 +19,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
   },
-  title: {
+  com: {
+    flex: 1,
+    alignContent: 'center',
+  },
+  titre: {
+    marginTop: 20,
     fontSize: 20,
-    fontWeight: 'bold',
   },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
+  image_titre: {
+    marginTop: 20,
+    width: 320,
+    height: 200,
   },
 });
