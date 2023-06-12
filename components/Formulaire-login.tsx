@@ -51,9 +51,9 @@ export default function LoginFunction() {
         <View>
             <View style={styles.main}>
                 <Text style={styles.Text}>Adresse e-mail :</Text>
-                <TextInput style={styles.input} onChangeText={setIdentifiant} value={identifiant} autoComplete="off" placeholder="Tapez votre adresse e-mail"/>
+                <TextInput style={styles.input} onChangeText={setIdentifiant} value={identifiant} autoComplete="off" placeholder="Adresse e-mail"/>
                 <Text style={styles.Text}>Mot de passe :</Text>
-                <TextInput style={styles.input} onChangeText={setPassword} value={password} autoComplete="off" secureTextEntry placeholder="Tapez votre mot de passe"/>
+                <TextInput style={styles.input} onChangeText={setPassword} value={password} autoComplete="off" secureTextEntry placeholder="Mot de passe"/>
                 {showErreur && <Text style={styles.TextErreur}>Mot de passe ou adresse e-mail incorrect</Text>}
                 <TouchableOpacity style={styles.button} onPress={handleConnexion}>
                     <Text style={styles.buttonText}>Connexion</Text>
@@ -72,11 +72,14 @@ const styles = StyleSheet.create({
     },
     input: {
       height: 40,
-      margin: 12,
+      margin: 16,
       borderWidth: 1,
-      borderRadius: 5,
+      borderRadius: 8,
       padding: 10,
-      fontSize: 15
+      fontSize: 15,
+      width: '130%',
+    backgroundColor: 'rgba(255, 255, 255, 0.4)'
+    
     },
     Text: {
         fontSize: 20,
