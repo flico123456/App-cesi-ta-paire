@@ -23,7 +23,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Page accueil',
+          title: "Page d'accueil",
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
           headerRight: () => (
             <Link href="/modal" asChild>
@@ -44,15 +44,22 @@ export default function TabLayout() {
       <Tabs.Screen
         name="two"
         options={{
-          title: 'Compte',
-          tabBarIcon: ({ color }) => <TabBarIcon name="circle" color={color} />,
+          title: "Connexion",
+          tabBarIcon: ({ color }) => <TabBarIcon name="user" color={color} />,
         }}
       />
        <Tabs.Screen
       name="three"
       options={{
-        title: 'Dernières sorties',
-        tabBarIcon: ({ color }) => <TabBarIcon name="calendar" color={color} />,
+        title: "Dernières sorties",
+        tabBarIcon: ({ color }) => <TabBarIcon name="list" color={color} />,
+      }}
+    />
+     <Tabs.Screen
+      name="four"
+      options={{
+        title: "Favoris",
+        tabBarIcon: ({ color }) => <TabBarIcon name="star" color={color} />,
       }}
     />
     </Tabs>

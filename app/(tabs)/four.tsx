@@ -10,34 +10,19 @@ export default function TabOneScreen() {
     // Ajoutez d'autres éléments d'image selon vos besoins
   ]);
 
-  const handleFavorite = (image) => {
-    const updatedImageList = imageList.map((item) =>
-      item.id === image.id ? { ...item, isFavorite: !item.isFavorite } : item
-    );
-    setImageList(updatedImageList);
-  };
-
   return (
     <View style={{ flex: 1 }}>
       <ImageBackground
-        source={require('../../assets/images/ImageSorties.jpg')}
+        source={require('../../assets/images/ImageFavoris.jpg')}
         style={styles.imageBackground}
       >
         <View style={styles.overlay}>
-          <Text style={styles.title}>Dernières sorties</Text>
+          <Text style={styles.title}>Vos favoris ici !</Text>
           <ScrollView contentContainerStyle={styles.content}>
             {imageList.map(image => (
               <TouchableOpacity key={image.id} style={styles.imageContainer}>
                 <Image source={image.source} style={styles.image} resizeMode="cover" />
                 <Text style={styles.description}>{image.description}</Text>
-                <TouchableOpacity onPress={() => handleFavorite(image)}>
-                  <FontAwesome
-                    name={image.isFavorite ? 'star' : 'star-o'}
-                    size={24}
-                    color={image.isFavorite ? 'yellow' : 'white'}
-                    style={styles.starIcon}
-                  />
-                </TouchableOpacity>
               </TouchableOpacity>
             ))}
           </ScrollView>
