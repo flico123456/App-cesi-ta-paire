@@ -12,7 +12,7 @@ export default function TabTwoScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.Titre}>
-        <Text style={styles.TitreFont}>Bienvenue l'application CESI ta Paire</Text>
+        <Text style={styles.TitreFont}>INSCRIPTION / CONNEXION</Text>
         <LoginFunction/>
       </View>
     </View>

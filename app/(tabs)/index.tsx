@@ -1,21 +1,37 @@
-import { StyleSheet } from 'react-native';
-
+//import { StyleSheet } from 'react-native';
 import EditScreenInfo from '../../components/EditScreenInfo';
-import { Text, View } from '../../components/Themed';
-import { Image } from 'react-native';
+//import { Text, View } from '../../components/Themed';
+import { View, Text, StyleSheet, ImageBackground } from 'react-native';
+import Image1 from '../assets/images/ImageAccueil.jpg'
 
 export default function TabOneScreen() {
   return (
-    <View style={styles.container}>
-      <View style={styles.com}>
-        <Text style={styles.titre}>CESI TA PAIRE</Text>
-        <Image style={styles.image_titre} source={{uri:"https://cdn.discordapp.com/attachments/1044193079688712213/1096070322601611264/rectangle_3.png"}}></Image>
-      </View>
-    </View>
+        <View style={{ flex: 1 }}>
+          <ImageBackground
+            source={Image1}
+            style={styles.backgroundImage}
+            resizeMode="cover"
+          >
+            <View style={styles.container}>
+              <View style={{justifyContent: 'flex-start' }}>
+                <Text style={styles.TitreFont}>CesiTaPaire</Text>
+              </View>
+              <View style={{ flex: 1, justifyContent: 'flex-end' }}>
+              <Text style={styles.TitreFont}>Restez au courant des nouvelles sorties</Text>
+              </View>
+            </View>
+          </ImageBackground>
+        </View>
   );
 }
 
 const styles = StyleSheet.create({
+
+  backgroundImage: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+},
   container: {
     flex: 1,
     alignItems: 'center',
@@ -33,4 +49,10 @@ const styles = StyleSheet.create({
     width: 320,
     height: 200,
   },
+
+  TitreFont: {
+    fontFamily: "Arial",
+    fontSize: 20,
+    fontWeight: "bold",
+},
 });
