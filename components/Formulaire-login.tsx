@@ -15,16 +15,14 @@ export default function LoginFunction() {
 
 
     const handleConnexion = () => {
-        const hashedPassword = SHA1(password).toString(enc.Hex);
-
-        console.log(hashedPassword)
 
         const data = {
           mail: identifiant,
-          password: hashedPassword,
+          password: password,
         };
+        console.log(password);
     
-        fetch('http://172.20.10.2:8888/Projetcesi/api/apiGetUser.php?', {
+        fetch('http://10.1.10.70:80/api/apiGetUser.php', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -51,9 +49,20 @@ export default function LoginFunction() {
         <View>
             <View style={styles.main}>
                 <Text style={styles.Text}>Adresse e-mail :</Text>
-                <TextInput style={styles.input} onChangeText={setIdentifiant} value={identifiant} autoComplete="off" placeholder="Tapez votre adresse e-mail"/>
+                <TextInput style={styles.input} 
+                onChangeText={setIdentifiant} 
+                value={identifiant} 
+                autoComplete="off" 
+                placeholder="Tapez votre adresse e-mail"
+                placeholderTextColor="#000"
+                />
                 <Text style={styles.Text}>Mot de passe :</Text>
-                <TextInput style={styles.input} onChangeText={setPassword} value={password} autoComplete="off" secureTextEntry placeholder="Tapez votre mot de passe"/>
+                <TextInput style={styles.input} 
+                onChangeText={setPassword} value={password} 
+                autoComplete="off" 
+                secureTextEntry placeholder="Tapez votre mot de passe"
+                placeholderTextColor="#000"
+                />
                 {showErreur && <Text style={styles.TextErreur}>Mot de passe ou adresse e-mail incorrect</Text>}
                 <TouchableOpacity style={styles.button} onPress={handleConnexion}>
                     <Text style={styles.buttonText}>Connexion</Text>
@@ -71,15 +80,17 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     input: {
-      height: 40,
-      margin: 12,
+      height: 50,
+      margin: 15,
       borderWidth: 1,
       borderRadius: 5,
       padding: 10,
-      fontSize: 15
+      fontSize: 15,
+      backgroundColor: '#ffe6e6',
     },
     Text: {
         fontSize: 20,
+        color: 'white',
     },
     TextErreur: {
         color: "red"
