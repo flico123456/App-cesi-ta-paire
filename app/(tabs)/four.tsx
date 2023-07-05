@@ -3,8 +3,15 @@ import React, { useState, useEffect } from 'react';
 import { Text, View } from '../../components/Themed';
 import { FontAwesome } from '@expo/vector-icons';
 
+interface Product {
+  id: number;
+  source: string;
+  description: string;
+}
+
+
 export default function TabOneScreen() {
-  const [favoriteImages, setFavoriteImages] = useState([]);
+  const [favoriteImages, setFavoriteImages] = useState<Product[]>([]);
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -58,7 +65,7 @@ export default function TabOneScreen() {
               {favoriteImages.length > 0 ? (
                 favoriteImages.map(image => (
                   <TouchableOpacity key={image.id} style={styles.imageContainer}>
-                    <Image source={image.source} style={styles.image} resizeMode="cover" />
+                    <Image source={{ uri: image.source }} style={styles.image} resizeMode="cover" />
                     <Text style={styles.description}>{image.description}</Text>
                   </TouchableOpacity>
                 ))

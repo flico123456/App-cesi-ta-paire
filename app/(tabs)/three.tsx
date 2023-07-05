@@ -1,7 +1,13 @@
 import { StyleSheet, ImageBackground, TouchableOpacity, ScrollView, Image } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, View } from '../../components/Themed';
 import { FontAwesome } from '@expo/vector-icons';
+
+interface Product {
+  id: number;
+  titre: string;
+  img: string;
+}
 
 export default function TabOneScreen() {
   const [imageList, setImageList] = useState([
@@ -10,12 +16,32 @@ export default function TabOneScreen() {
     // Ajoutez d'autres éléments d'image selon vos besoins
   ]);
 
-  const handleFavorite = (image) => {
+  const handleFavorite = (image: { id: number }) => {
     const updatedImageList = imageList.map((item) =>
       item.id === image.id ? { ...item, isFavorite: !item.isFavorite } : item
     );
     setImageList(updatedImageList);
   };
+
+  const [product, setProduct] = useState<Product[]>([]);
+
+  useEffect(() => {
+    async function fetchProduct() {
+      try {
+        const response = await fetch("http://192.168.1.15/CUBES3-WEBSITE/api/apiGetProduct.php", {
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+        });
+        const data = await response.json();
+        setProduct(data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchProduct();
+  }, []);
 
   return (
     <View style={{ flex: 1 }}>
@@ -24,20 +50,15 @@ export default function TabOneScreen() {
         style={styles.imageBackground}
       >
         <View style={styles.overlay}>
-          <Text style={styles.title}>Dernières sorties</Text>
-          <ScrollView contentContainerStyle={styles.content}>
-            {imageList.map(image => (
-              <TouchableOpacity key={image.id} style={styles.imageContainer}>
-                <Image source={image.source} style={styles.image} resizeMode="cover" />
-                <Text style={styles.description}>{image.description}</Text>
-                <TouchableOpacity onPress={() => handleFavorite(image)}>
-                  <FontAwesome
-                    name={image.isFavorite ? 'star' : 'star-o'}
-                    size={24}
-                    color={image.isFavorite ? 'yellow' : 'white'}
-                    style={styles.starIcon}
-                  />
-                </TouchableOpacity>
+          <ScrollView>
+            {product.map((item) => (
+              <TouchableOpacity
+                key={item.id}
+                style={styles.imageContainer}
+                onPress={() => handleFavorite(item)}
+              >
+                <Image source={{ uri: item.img }} style={styles.image} />
+                <Text style={styles.title}>{item.titre}</Text>
               </TouchableOpacity>
             ))}
           </ScrollView>
