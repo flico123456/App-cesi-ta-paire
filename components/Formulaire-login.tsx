@@ -22,7 +22,7 @@ export default function LoginFunction() {
         };
         console.log(password);
     
-        fetch('http://10.1.10.70:80/api/apiGetUser.php', {
+        fetch('http://192.168.0.17:8080/api/apiGetUser.php', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

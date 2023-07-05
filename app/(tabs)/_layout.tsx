@@ -62,13 +62,6 @@ export default function TabLayout() {
         tabBarIcon: ({ color }) => <TabBarIcon name="star" color={color} />,
       }}
     />
-         <Tabs.Screen
-      name="five"
-      options={{
-        title: "Contact",
-        tabBarIcon: ({ color }) => <TabBarIcon name="comments" color={color} />,
-      }}
-      />
     </Tabs>
   );
 }

@@ -1,14 +1,49 @@
 import { StyleSheet, ImageBackground, TouchableOpacity, ScrollView, Image } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text, View } from '../../components/Themed';
 import { FontAwesome } from '@expo/vector-icons';
 
 export default function TabOneScreen() {
-  const [imageList, setImageList] = useState([
-    { id: 1, source: require('../../assets/images/rectangle_3.png'), description: 'Description de l\'image 1', isFavorite: false },
-    { id: 2, source: require('../../assets/images/rectangle_3.png'), description: 'Description de l\'image 2', isFavorite: false },
-    // Ajoutez d'autres éléments d'image selon vos besoins
-  ]);
+  const [favoriteImages, setFavoriteImages] = useState([]);
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+
+  useEffect(() => {
+    // Vérifier si l'utilisateur est connecté
+    const userLoggedIn = checkUserLoggedIn();
+
+    // Mettre à jour l'état de connexion de l'utilisateur
+    setIsUserLoggedIn(userLoggedIn);
+
+    if (userLoggedIn) {
+      // Si l'utilisateur est connecté, récupérer ses favoris depuis l'API
+      fetchFavoriteImages()
+        .then((data) => setFavoriteImages(data))
+        .catch((error) => console.error(error));
+    }
+  }, []);
+
+  const checkUserLoggedIn = () => {
+    // Code pour vérifier si l'utilisateur est connecté
+    // Renvoie true si l'utilisateur est connecté, false sinon
+    // Remplacez cette logique par votre propre vérification de connexion
+    // par exemple, en utilisant le contexte d'authentification de votre application
+    return true; // Modifiez cette valeur en fonction de votre logique de connexion
+  };
+
+  const fetchFavoriteImages = async () => {
+    try {
+      const response = await fetch('http://votre-api.com/favorites'); // Remplacez l'URL par l'URL de votre API pour récupérer les favoris de l'utilisateur
+      if (response.ok) {
+        const data = await response.json();
+        return data;
+      } else {
+        throw new Error('Une erreur s\'est produite lors de la récupération des favoris.');
+      }
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
 
   return (
     <View style={{ flex: 1 }}>
@@ -18,14 +53,22 @@ export default function TabOneScreen() {
       >
         <View style={styles.overlay}>
           <Text style={styles.title}>Vos favoris ici !</Text>
-          <ScrollView contentContainerStyle={styles.content}>
-            {imageList.map(image => (
-              <TouchableOpacity key={image.id} style={styles.imageContainer}>
-                <Image source={image.source} style={styles.image} resizeMode="cover" />
-                <Text style={styles.description}>{image.description}</Text>
-              </TouchableOpacity>
-            ))}
-          </ScrollView>
+          {isUserLoggedIn ? (
+            <ScrollView contentContainerStyle={styles.content}>
+              {favoriteImages.length > 0 ? (
+                favoriteImages.map(image => (
+                  <TouchableOpacity key={image.id} style={styles.imageContainer}>
+                    <Image source={image.source} style={styles.image} resizeMode="cover" />
+                    <Text style={styles.description}>{image.description}</Text>
+                  </TouchableOpacity>
+                ))
+              ) : (
+                <Text style={styles.errorText}>Vous n'avez pas encore de favoris.</Text>
+              )}
+            </ScrollView>
+          ) : (
+            <Text style={styles.errorText}>Connectez-vous pour afficher vos favoris.</Text>
+          )}
         </View>
       </ImageBackground>
     </View>
@@ -69,7 +112,9 @@ const styles = StyleSheet.create({
     color: 'white',
     marginTop: 10,
   },
-  starIcon: {
-    marginTop: 10,
+  errorText: {
+    color: 'white',
+    textAlign: 'center',
+    marginTop: 20,
   },
 });
