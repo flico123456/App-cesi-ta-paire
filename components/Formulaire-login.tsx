@@ -25,7 +25,8 @@ export default function LoginFunction() {
         fetch('http://192.168.0.17:8080/api/apiGetUser.php', {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json',
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
           },
           body: JSON.stringify(data),
         })
@@ -81,6 +82,7 @@ const styles = StyleSheet.create({
     },
     input: {
       height: 50,
+      width: 300,
       margin: 15,
       borderWidth: 1,
       borderRadius: 5,
