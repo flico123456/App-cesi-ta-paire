@@ -22,10 +22,11 @@ export default function LoginFunction() {
         };
         console.log(password);
     
-        fetch('http://10.1.10.70:80/api/apiGetUser.php', {
+        fetch('http://192.168.1.14:8888/CUBES3-WEBSITE/api/apiGetUser.php', {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json',
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
           },
           body: JSON.stringify(data),
         })
@@ -81,6 +82,7 @@ const styles = StyleSheet.create({
     },
     input: {
       height: 50,
+      width: 300,
       margin: 15,
       borderWidth: 1,
       borderRadius: 5,
